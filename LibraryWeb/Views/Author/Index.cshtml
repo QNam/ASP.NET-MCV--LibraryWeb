@@ -1,0 +1,104 @@
+﻿@model  IEnumerable<LibraryWeb.Models.author>
+
+@{
+    /**/
+
+    ViewBag.Title = "Quản lý tác giả";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách tác giả</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                <div class="pull-right">
+                    <button class="btn btn-success" onclick="addAuthor()"><span><i class="fa fa-plus"></i></span> Thêm tác giả</button>
+                </div>
+                <table id="viewAuthorDT" class="table table-bordered">
+                    <thead>
+                    <td class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</td>
+                    <td class="text-center">@Html.DisplayNameFor(model => model.author_name)</td>
+                    <td class="text-center"></td>
+                    </thead>
+                    <tbody>
+                        @foreach (var author in ViewBag.authors)
+                        {
+                            <tr>
+                                <td class="text-center">@author.author_id</td>
+                                <td>@author.author_name</td>
+                                <td class="text-center">
+                                    <a href="javascript:;" class="action-link bg-success"><span><i class="fa fa-eye"></i></span> </a>
+                                    <a href="javascript:;" class="action-link bg-warning"><span><i class="fa fa-pencil"></i></span> </a>
+                                    <a href="javascript:;" class="action-link bg-danger"><span><i class="fa fa-trash-o"></i></span> </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAuthor">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Thêm Tác Giả</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/" method="post">
+                    <div class="form-group">
+                        <label>@Html.DisplayNameFor(model => model.author_name)</label>
+                        <input type="text" class="form-control" name="nameAuthor" value="" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        function addAuthor() {
+            $('#modalAuthor').modal('show');
+        }
+
+        var viewAuthorDT;
+
+        function setViewAuthorDT() {
+            viewAuthorDT = $('#viewAuthorDT').DataTable({
+                language: {
+                    emptyTable: "<h3>Không tìm thấy dữ liệu !</h3>"
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            setViewAuthorDT();
+        });
+    </script>
+}
