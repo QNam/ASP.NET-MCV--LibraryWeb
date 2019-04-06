@@ -25,40 +25,22 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
+
             <div class="x_content">
                 <br>
                 <div class="pull-right">
                     <button class="btn btn-success" onclick="addAuthor()"><span><i class="fa fa-plus"></i></span> Thêm tác giả</button>
                 </div>
+
                 <table id="viewAuthorDT" class="table table-bordered">
                     <thead>
-                    <td class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</td>
-                    <td class="text-center">@Html.DisplayNameFor(model => model.author_name)</td>
-                    <td class="text-center"></td>
+                        <td class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</td>
+                        <td class="text-center">@Html.DisplayNameFor(model => model.author_name)</td>
+                        <td class="text-center"></td>
                     </thead>
                     <tbody>
-                        @foreach (var author in ViewBag.authors)
-                        {
-                            <tr id="author-@author.author_id">
-                                <td class="text-center">@author.author_id</td>
-                                <td><a href="javascript:;" class="editable"
-                                       data-type="text" 
-                                       data-pk="@author.author_id" 
-                                       data-title="Click để sửa !"
-                                       data-url="/Author/ajaxEditnameAuthor">
-                                    @author.author_name
-                                </a></td>
-                                <td class="text-center">
-                                    <a href="javascript:;" class="action-link bg-success"><span><i class="fa fa-eye"></i></span> </a>
-                                    <a href="javascript:;" onclick="getAuthorForEdit(@author.author_id)" 
-                                       class="action-link bg-warning"><span><i class="fa fa-pencil"></i></span> </a>
-                                    <a href="javascript:;" class="action-link bg-danger" onclick="removeAuthor(@author.author_id)">
-                                        <span><i class="fa fa-trash-o"></i></span> </a>
-                                </td>
-                            </tr>
-                        }
+                       @Html.Partial("Data")
                     </tbody>
-
                 </table>
 
             </div>
@@ -67,41 +49,17 @@
 </div>
 
 
-@*Modal thêm sửa tác giả*@ 
-<div class="modal fade" id="modalAuthor">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Thêm Tác Giả</h4>
-            </div>
-            <div class="modal-body">
-                <form action="/Author/Store" method="post">
-                    <div class="form-group">
-                        <label>@Html.DisplayNameFor(model => model.author_name)</label>
-                        <input type="hidden" class="form-control" name="authorId" />
-                        <input type="text" class="form-control" name="authorName"/>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@*Modal thêm sửa tác giả*@
+@Html.Partial("Store")
 
 @section Scripts
 {
     <script>
-        function addAuthor() {
-            $('#modalAuthor').modal('show');
-        }
-
         var AuthorDT;
 
         function setViewAuthorDT() {
             AuthorDT = $('#viewAuthorDT').DataTable({
+                "aaSorting": [],
                 language: {
                     emptyTable: "<h3>Không tìm thấy dữ liệu !</h3>"
                 }
@@ -112,8 +70,41 @@
             setViewAuthorDT();
         });
 
-        function getAuthorForEdit(id)
+        $('#modalAuthor').on('hidden.bs.modal', function () {
+
+            $('#modalAuthor input').val("");
+        });
+
+        $("#formAddAuthor").validate({
+            rules: {
+                authorName: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 60
+                }
+            },
+            messages: {
+                authorName: {
+                    required: "Họ tên tác giả không được bỏ trống !",
+                    minlength: "Họ tên không dưới 3 kí tự !",
+                    maxlength: "Họ tên không quá 60 kí tự !",
+                }
+            }
+
+        });
+    </script>
+
+    <script>
+        function addAuthor() {
+            $('#modalAuthor').modal('show');
+        }
+
+        function viewDetailAuthor(id)
         {
+            $('#dAuthor-' + id).toggle('slow');
+        }
+
+        function getAuthorForEdit(id) {
             $('#modalAuthor input[name="authorId"]').val(id);
             $.ajax({
                 url: '/Author/GetOneAuthor',
@@ -131,31 +122,28 @@
         }
 
 
-        function removeAuthor(id)
-        {
-            if (confirm("Bạn chắc chắn muốn xóa tác giả này chứ !"))
-            {
+        function removeAuthor(id) {
+            if (confirm("Tác giả chỉ có thể xóa khi không tồn tại cuốn sách nào thuộc tác giả này !\nBạn chắc chắn !")) {
                 $.ajax({
                     url: '/Author/AjaxRemoveAuthor',
                     type: 'POST',
                     data: { authorId: id },
                     success: function (data) {
-                        if (data.Status)
-                        {
-                            AuthorDT.rows('#author-' + id).remove().draw();                            showNotify("", data.Msg, 'bg-success');
+                        if (data.Status) {
+                            AuthorDT.rows('#author-' + id).remove().draw();
+                            showNotify("", data.Msg, 'bg-success');
                         }
-                        else
-                        {
+                        else {
                             showNotify("", data.Msg, 'bg-danger');
                         }
-                        
+
                     },
                     error: function () {
                         /* Act on the event */
                     }
                 })
             }
-            
+
         }
     </script>
 }

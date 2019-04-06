@@ -1,0 +1,58 @@
+﻿@model  LibraryWeb.Models.author
+
+@foreach (var author in ViewBag.authors)
+{
+    <tr id="author-@author.author_id">
+        <td class="text-center">@author.author_id</td>
+        <td>
+            <a href="javascript:;" class="editable"
+               data-type="text"
+               data-pk="@author.author_id"
+               data-title="Click để sửa !"
+               data-url="/Author/ajaxEditnameAuthor">
+                @author.author_name
+            </a>
+        </td>
+        <td class="text-center">
+            <a href="javascript:;" class="action-link bg-success" onclick="viewDetailAuthor(@author.author_id)">
+                <span><i class="fa fa-eye"></i></span>
+            </a>
+            <a href="javascript:;" onclick="getAuthorForEdit(@author.author_id)"
+               class="action-link bg-warning">
+                <span><i class="fa fa-pencil"></i></span>
+            </a>
+            <a href="javascript:;" class="action-link bg-danger" onclick="removeAuthor(@author.author_id)">
+                <span><i class="fa fa-trash-o"></i></span>
+            </a>
+        </td>
+    </tr>
+
+    <tr class="detailAuthor" id="dAuthor-@author.author_id" style="display: none">
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td colspan="3">
+            <div>
+                <p class="lead text-center">Thông tin tác giả</p>
+                <div>
+                    <p><b>Họ tên:</b> @author.author_name</p>
+                    <p><b>Danh sách sách:</b></p>
+                    <table class="table table-hover">
+                        <thead>
+                        <td>Mã sách</td>
+                        <td>Tên sách</td>
+                        <td>Số lượng</td>
+                        </thead>
+                        @foreach (var book in author.books)
+                        {
+                            <tr>
+                                <td>@book.book_id</td>
+                                <td>@book.book_name</td>
+                                <td>@book.book_qty</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+}

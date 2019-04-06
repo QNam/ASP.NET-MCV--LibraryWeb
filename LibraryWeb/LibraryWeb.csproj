@@ -273,6 +273,8 @@
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Author\Store.cshtml" />
+    <Content Include="Views\Author\Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

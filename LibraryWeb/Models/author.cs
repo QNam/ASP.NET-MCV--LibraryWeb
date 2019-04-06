@@ -28,6 +28,7 @@ namespace LibraryWeb.Models
         public int author_id { get; set; }
 
         [Display(Name = "Tên tác giả")]
+        [Required, StringLength(60, MinimumLength = 3)]
         //[Required(ErrorMessage = "Tên tác giả không dược bỏ trống !")]
         public string author_name { get; set; }
     

@@ -43,10 +43,15 @@ namespace LibraryWeb.Controllers
         public ActionResult GetOneAuthor()
         {
             int id = Convert.ToInt32(Request["authorId"]);
+            author author = new author();
 
             var data = db.authors.Find(id);
-            return Json(data, JsonRequestBehavior.AllowGet);
+            author.author_id    = data.author_id;
+            author.author_name  = data.author_name;
+
+            return Json(author, JsonRequestBehavior.AllowGet);
         }
+
 
         [HttpPost]
         public ActionResult Store()
@@ -57,9 +62,10 @@ namespace LibraryWeb.Controllers
 
             //if (ModelState.IsValid)
             //{
-            //    return RedirectToAction("Index");
+            //    return RedirectToAction("Index","Home");
             //}
 
+            //check xem có id ko nếu có thì là update nếu không thì là insert
             try
             {
                 id = Convert.ToInt32(Request["authorId"]);
@@ -71,20 +77,29 @@ namespace LibraryWeb.Controllers
 
             string name = Request["authorName"];
 
-            if(flag = true)
+            //chuẩn bị câu lệnh
+            if (flag = true)
             {
+                
                 author.author_id    = id;
                 author.author_name  = name;
-
-                db.authors.Add(author);
+                db.authors.AddOrUpdate(author);
             } else
             {
                 author.author_name = name;
-
                 db.authors.Add(author);
             }
 
-            db.SaveChanges();
+            //chạy lệnh
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -109,7 +124,7 @@ namespace LibraryWeb.Controllers
             }
             catch (Exception e)
             {
-                mes.Status = true;
+                mes.Status = false;
                 mes.Msg = "Xóa tác giả thất bại !";
 
                 return Json(mes, JsonRequestBehavior.AllowGet);
