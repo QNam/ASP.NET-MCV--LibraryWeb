@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LibraryWeb.Lib;
 using LibraryWeb.Models;
 namespace LibraryWeb.Controllers
 {
@@ -28,6 +29,12 @@ namespace LibraryWeb.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public PartialViewResult GetQuantityOfBooks()
+        {
+            int quantityOfBooks = db.books.Count();
+            ViewBag.Message = quantityOfBooks;
+            return PartialView();
         }
     }
 }
