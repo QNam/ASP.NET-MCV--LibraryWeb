@@ -25,3 +25,6 @@
     font-weight: bold;
 }
 
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+     border-bottom-width: 0!important; 
+}

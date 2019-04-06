@@ -1,13 +1,10 @@
-﻿@model  LibraryWeb.Models.author
-
+﻿
 @{
-    /**/
-
-    ViewBag.Title = "Quản lý tác giả";
+    ViewBag.Title = "Quản Lý Đơn Hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@model  LibraryWeb.Models.author
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -31,17 +28,17 @@
             <div class="x_content">
                 <br>
                 <div class="pull-right">
-                    <button class="btn btn-success" onclick="addAuthor()"><span><i class="fa fa-plus"></i></span> Thêm tác giả</button>
+                    <button class="btn btn-success" onclick="addAuthor()"><span><i class="fa fa-plus"></i></span> Mươn sách</button>
                 </div>
 
                 <table id="viewAuthorDT" class="table table-bordered">
                     <thead>
-                        <th class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</th>
-                        <th class="text-center">@Html.DisplayNameFor(model => model.author_name)</th>
-                        <th class="text-center"></th>
+                    <th class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.author_name)</th>
+                    <th class="text-center"></th>
                     </thead>
                     <tbody>
-                       @Html.Partial("Data")
+                     
                     </tbody>
                 </table>
 
@@ -52,15 +49,15 @@
 
 
 @*Modal thêm sửa tác giả*@
-@Html.Partial("Store")
+
 
 @section Scripts
 {
-    <script>
+    @*<script>
         var AuthorDT;
-
-        function setViewAuthorDT() {
-            AuthorDT = $('#viewAuthorDT').DataTable({
+        setViewAuthorDT() {
+            AuthorDT = $('#viewAuthorDT
+        function ').DataTable({
                 "aaSorting": [],
                 "language": languageSettingDT,
             });
@@ -146,5 +143,6 @@
             }
 
         }
-    </script>
+    </script>*@
 }
+

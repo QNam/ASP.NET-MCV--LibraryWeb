@@ -9,6 +9,6 @@
     "\\LibraryWeb\\Views\\Author",
     "\\LibraryWeb\\Views\\Shared"
   ],
-  "SelectedNode": "\\LibraryWeb\\Models\\author.cs",
+  "SelectedNode": "\\LibraryWeb\\Models\\Library.edmx",
   "PreviewInSolutionExplorer": false
 }
