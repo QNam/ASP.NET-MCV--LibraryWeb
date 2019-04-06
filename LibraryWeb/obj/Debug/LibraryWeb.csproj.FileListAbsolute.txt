@@ -183,8 +183,8 @@ D:\Workspace\LibraryWeb\LibraryWeb\bin\Microsoft.AI.DependencyCollector.xml
 D:\Workspace\LibraryWeb\LibraryWeb\bin\Microsoft.AI.WindowsServer.xml
 D:\Workspace\LibraryWeb\LibraryWeb\bin\Microsoft.AI.Web.xml
 D:\Workspace\LibraryWeb\LibraryWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.csprojAssemblyReference.cache
 D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.csproj.CoreCompileInputs.cache
 D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.csproj.CopyComplete
 D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.dll
 D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.pdb
+D:\Workspace\LibraryWeb\LibraryWeb\obj\Debug\LibraryWeb.csprojAssemblyReference.cache

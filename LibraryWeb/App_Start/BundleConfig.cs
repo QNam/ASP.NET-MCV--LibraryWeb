@@ -8,13 +8,14 @@ namespace LibraryWeb
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/base").Include(
-                        "~/Scripts/jquery.min.js",
                         "~/Scripts/bootstrap.min.js",
-                        //"~/Scripts/jquery-validation.min.js",
+                        "~/Scripts/jquery-validation.min.js",
                         "~/Scripts/pnotify.custom.min.js",
                         "~/Scripts/datatables.min.js",
                         "~/Scripts/dataTables.bootstrap.min.js",
+                        "~/Scripts/bootstrap-editable.min.js",
                         "~/Scripts/custom.min.js"
                         ));
 
@@ -25,6 +26,7 @@ namespace LibraryWeb
                       "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/dataTables.bootstrap.min.css",
                       "~/Content/pnotify.custom.min.css",
+                      "~/Content/bootstrap-editable.css",
                       "~/Content/custom.min.css"));
         }
     }

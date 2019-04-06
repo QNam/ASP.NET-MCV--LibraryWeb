@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\LibraryWeb",
+    "\\LibraryWeb\\App_Start",
+    "\\LibraryWeb\\Controllers",
+    "\\LibraryWeb\\Models",
+    "\\LibraryWeb\\Views",
+    "\\LibraryWeb\\Views\\Author",
+    "\\LibraryWeb\\Views\\Shared"
+  ],
+  "SelectedNode": "\\LibraryWeb\\Models\\author.cs",
+  "PreviewInSolutionExplorer": false
+}

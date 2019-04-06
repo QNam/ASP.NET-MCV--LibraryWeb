@@ -4,14 +4,14 @@
     <Key>
       <PropertyRef Name="author_id" />
     </Key>
-    <Property Name="author_id" Type="int" Nullable="false" />
+    <Property Name="author_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="author_name" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="book">
     <Key>
       <PropertyRef Name="book_id" />
     </Key>
-    <Property Name="book_id" Type="int" Nullable="false" />
+    <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="book_name" Type="nvarchar" MaxLength="250" />
     <Property Name="book_qty" Type="int" />
     <Property Name="category_id" Type="int" Nullable="false" />
@@ -24,7 +24,7 @@
     <Key>
       <PropertyRef Name="cat_id" />
     </Key>
-    <Property Name="cat_id" Type="int" Nullable="false" />
+    <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="cat_name" Type="nvarchar" MaxLength="250" />
     <Property Name="cat_parent" Type="int" Nullable="false" />
   </EntityType>
@@ -32,7 +32,7 @@
     <Key>
       <PropertyRef Name="order_detail_id" />
     </Key>
-    <Property Name="order_detail_id" Type="int" Nullable="false" />
+    <Property Name="order_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="order_id" Type="int" Nullable="false" />
     <Property Name="book_id" Type="int" Nullable="false" />
     <Property Name="status" Type="int" />
@@ -41,7 +41,7 @@
     <Key>
       <PropertyRef Name="order_id" />
     </Key>
-    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="order_from" Type="date" />
     <Property Name="order_to" Type="date" />
     <Property Name="created_at" Type="date" />
@@ -61,7 +61,7 @@
     <Key>
       <PropertyRef Name="vendor_id" />
     </Key>
-    <Property Name="vendor_id" Type="int" Nullable="false" />
+    <Property Name="vendor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="vendor_name" Type="nchar" MaxLength="150" />
     <Property Name="vendor_phone" Type="nchar" MaxLength="12" />
     <Property Name="vendor_address" Type="nvarchar" MaxLength="250" />

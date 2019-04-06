@@ -12,10 +12,10 @@ namespace LibraryWeb.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class author
     {
-        libraryEntities db = new libraryEntities();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public author()
         {
@@ -23,16 +23,14 @@ namespace LibraryWeb.Models
         }
 
         [Display(Name = "ID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int author_id { get; set; }
 
         [Display(Name = "Tên tác giả")]
+        //[Required(ErrorMessage = "Tên tác giả không dược bỏ trống !")]
         public string author_name { get; set; }
-        
-        //public List<author> getListAuthor()
-        //{
-           
-        //}
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<book> books { get; set; }
     }

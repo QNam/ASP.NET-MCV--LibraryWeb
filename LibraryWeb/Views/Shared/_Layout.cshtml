@@ -9,7 +9,9 @@
     <link rel="icon" href="~/Content/img/favicon.ico" type="image/ico" />
 
     <title>@ViewBag.Title </title>
+
     @Styles.Render("~/Content/base")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 
 <body class="nav-md">
@@ -107,6 +109,24 @@
     </div>
 
     @Scripts.Render("~/bundles/base")
+    <script>
+        $(document).ready(function () {
+
+            $('.editable').editable({
+                validate: function (value) {
+                    if ($.trim(value) == '') {
+                        return 'Trường này không được bỏ trống !';
+                    }
+                }
+            });
+
+            $.fn.editable.defaults.mode = 'inline';
+            $("body").tooltip({
+                selector: '[data-title]'
+            });
+
+        });
+    </script>
     @RenderSection("Scripts", false)
 </body>
 </html>

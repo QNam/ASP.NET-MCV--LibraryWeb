@@ -1,4 +1,4 @@
-﻿@model  IEnumerable<LibraryWeb.Models.author>
+﻿@model  LibraryWeb.Models.author
 
 @{
     /**/
@@ -39,13 +39,21 @@
                     <tbody>
                         @foreach (var author in ViewBag.authors)
                         {
-                            <tr>
+                            <tr id="author-@author.author_id">
                                 <td class="text-center">@author.author_id</td>
-                                <td>@author.author_name</td>
+                                <td><a href="javascript:;" class="editable"
+                                       data-type="text" 
+                                       data-pk="@author.author_id" 
+                                       data-title="Click để sửa !"
+                                       data-url="/Author/ajaxEditnameAuthor">
+                                    @author.author_name
+                                </a></td>
                                 <td class="text-center">
                                     <a href="javascript:;" class="action-link bg-success"><span><i class="fa fa-eye"></i></span> </a>
-                                    <a href="javascript:;" class="action-link bg-warning"><span><i class="fa fa-pencil"></i></span> </a>
-                                    <a href="javascript:;" class="action-link bg-danger"><span><i class="fa fa-trash-o"></i></span> </a>
+                                    <a href="javascript:;" onclick="getAuthorForEdit(@author.author_id)" 
+                                       class="action-link bg-warning"><span><i class="fa fa-pencil"></i></span> </a>
+                                    <a href="javascript:;" class="action-link bg-danger" onclick="removeAuthor(@author.author_id)">
+                                        <span><i class="fa fa-trash-o"></i></span> </a>
                                 </td>
                             </tr>
                         }
@@ -58,6 +66,8 @@
     </div>
 </div>
 
+
+@*Modal thêm sửa tác giả*@ 
 <div class="modal fade" id="modalAuthor">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -66,13 +76,14 @@
                 <h4 class="modal-title">Thêm Tác Giả</h4>
             </div>
             <div class="modal-body">
-                <form action="/" method="post">
+                <form action="/Author/Store" method="post">
                     <div class="form-group">
                         <label>@Html.DisplayNameFor(model => model.author_name)</label>
-                        <input type="text" class="form-control" name="nameAuthor" value="" />
+                        <input type="hidden" class="form-control" name="authorId" />
+                        <input type="text" class="form-control" name="authorName"/>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success">Cập nhật</button>
+                        <button type="submit" class="btn btn-success">Cập nhật</button>
                     </div>
                 </form>
             </div>
@@ -87,10 +98,10 @@
             $('#modalAuthor').modal('show');
         }
 
-        var viewAuthorDT;
+        var AuthorDT;
 
         function setViewAuthorDT() {
-            viewAuthorDT = $('#viewAuthorDT').DataTable({
+            AuthorDT = $('#viewAuthorDT').DataTable({
                 language: {
                     emptyTable: "<h3>Không tìm thấy dữ liệu !</h3>"
                 }
@@ -100,5 +111,51 @@
         $(document).ready(function () {
             setViewAuthorDT();
         });
+
+        function getAuthorForEdit(id)
+        {
+            $('#modalAuthor input[name="authorId"]').val(id);
+            $.ajax({
+                url: '/Author/GetOneAuthor',
+                type: 'POST',
+                data: { authorId: id },
+                success: function (data) {
+                    $('#modalAuthor').modal('show');
+                    $('#modalAuthor input[name = "authorName"]').val(data['author_name']);
+                    console.log(data);
+                },
+                error: function () {
+                    /* Act on the event */
+                }
+            })
+        }
+
+
+        function removeAuthor(id)
+        {
+            if (confirm("Bạn chắc chắn muốn xóa tác giả này chứ !"))
+            {
+                $.ajax({
+                    url: '/Author/AjaxRemoveAuthor',
+                    type: 'POST',
+                    data: { authorId: id },
+                    success: function (data) {
+                        if (data.Status)
+                        {
+                            AuthorDT.rows('#author-' + id).remove().draw();                            showNotify("", data.Msg, 'bg-success');
+                        }
+                        else
+                        {
+                            showNotify("", data.Msg, 'bg-danger');
+                        }
+                        
+                    },
+                    error: function () {
+                        /* Act on the event */
+                    }
+                })
+            }
+            
+        }
     </script>
 }
