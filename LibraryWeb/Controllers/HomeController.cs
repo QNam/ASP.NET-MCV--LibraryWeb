@@ -30,11 +30,11 @@ namespace LibraryWeb.Controllers
 
             return View();
         }
-        public PartialViewResult GetQuantityOfBooks()
+        public ActionResult GetQuantityOfBooks()
         {
             int quantityOfBooks = db.books.Count();
             ViewBag.Message = quantityOfBooks;
-            return PartialView();
+            return View();
         }
     }
 }
