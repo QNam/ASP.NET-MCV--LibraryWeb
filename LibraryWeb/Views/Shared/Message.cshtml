@@ -1,0 +1,44 @@
+﻿@{
+    string text = (string)TempData["Message"];
+    string type = (string)TempData["Type"];
+
+    string sclass = "bg-success";
+    if (type == "success") { sclass = "bg-sussess"; }
+    if (type == "error") { sclass = "bg-danger"; }
+    if (type == "info") { sclass = "bg-info"; }
+    if (type == "warning") { sclass = "bg-warning"; }
+}
+
+<style>
+    .brighttheme-notice{background-color: unset}
+    .bg-sussess {background-color: #28a745 !important}
+    .bg-danger {
+        background-color: #dc3545 !important
+    }
+    .bg-info {
+        background-color: #17a2b8 !important
+    }
+    .bg-warning {
+        background-color: #ffc107 !important
+    }
+    .bg-sussess, .bg-info, .bg-danger,
+    .bg-sussess .ui-pnotify-text,
+    .bg-info .ui-pnotify-text,
+    .bg-danger .ui-pnotify-text {
+        color: #fff
+    }
+</style>
+@if (!string.IsNullOrWhiteSpace(text))
+{
+<script>
+	$( window ).load(function() {
+		new PNotify({
+			"title": '',
+			"text": "@text",
+			"addclass": "@sclass",
+			"delay": 3000,
+			"icon":''
+		})
+	});
+</script>
+}

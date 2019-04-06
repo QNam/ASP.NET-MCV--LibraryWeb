@@ -7,6 +7,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -60,9 +62,7 @@
         function setViewAuthorDT() {
             AuthorDT = $('#viewAuthorDT').DataTable({
                 "aaSorting": [],
-                language: {
-                    emptyTable: "<h3>Không tìm thấy dữ liệu !</h3>"
-                }
+                "language": languageSettingDT,
             });
         }
 
@@ -131,7 +131,7 @@
                     success: function (data) {
                         if (data.Status) {
                             AuthorDT.rows('#author-' + id).remove().draw();
-                            showNotify("", data.Msg, 'bg-success');
+                            showNotify("", data.Msg, 'bg-sussess');
                         }
                         else {
                             showNotify("", data.Msg, 'bg-danger');

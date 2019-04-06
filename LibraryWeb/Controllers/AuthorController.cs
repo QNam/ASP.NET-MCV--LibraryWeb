@@ -9,7 +9,7 @@ using LibraryWeb.Lib;
 
 namespace LibraryWeb.Controllers
 {
-    public class AuthorController : Controller
+    public class AuthorController : BaseController
     {
         libraryEntities db = new libraryEntities();
 
@@ -56,7 +56,7 @@ namespace LibraryWeb.Controllers
         [HttpPost]
         public ActionResult Store()
         {
-            bool flag = true;
+            bool update = true;
             author author = new author();
             int id = 0;
 
@@ -72,13 +72,13 @@ namespace LibraryWeb.Controllers
             }
             catch (Exception e)
             {
-                flag = false;
+                update = false;
             }
 
             string name = Request["authorName"];
 
             //chuẩn bị câu lệnh
-            if (flag = true)
+            if (update == true)
             {
                 
                 author.author_id    = id;
@@ -94,10 +94,18 @@ namespace LibraryWeb.Controllers
             try
             {
                 db.SaveChanges();
+
+                if (update == true)
+                    SetTempData("Cập nhật tác giả thành công !", "success");
+                else
+                    SetTempData("Thêm tác giả thành công !", "success");
             }
             catch (Exception e)
             {
-
+                if (update == true)
+                    SetTempData("Cập nhật tác giả thất bại !", "error");
+                else
+                    SetTempData("Thêm tác giả thất bại !", "error");
             }
 
             return RedirectToAction("Index");
