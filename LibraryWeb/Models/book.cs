@@ -17,6 +17,7 @@ namespace LibraryWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public book()
         {
+            this.cate_book = new HashSet<cate_book>();
             this.detail_order = new HashSet<detail_order>();
         }
     
@@ -28,10 +29,13 @@ namespace LibraryWeb.Models
         public int author_id { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        public Nullable<int> book_price { get; set; }
     
         public virtual author author { get; set; }
         public virtual category category { get; set; }
         public virtual vendor vendor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cate_book> cate_book { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<detail_order> detail_order { get; set; }
     }

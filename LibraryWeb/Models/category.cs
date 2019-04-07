@@ -18,6 +18,7 @@ namespace LibraryWeb.Models
         public category()
         {
             this.books = new HashSet<book>();
+            this.cate_book = new HashSet<cate_book>();
         }
     
         public int cat_id { get; set; }
@@ -26,5 +27,7 @@ namespace LibraryWeb.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<book> books { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cate_book> cate_book { get; set; }
     }
 }

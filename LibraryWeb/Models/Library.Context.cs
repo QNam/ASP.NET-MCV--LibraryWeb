@@ -19,6 +19,7 @@ namespace LibraryWeb.Models
             : base("name=libraryEntities")
         {
         }
+
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,10 +28,12 @@ namespace LibraryWeb.Models
     
         public virtual DbSet<author> authors { get; set; }
         public virtual DbSet<book> books { get; set; }
+        public virtual DbSet<cate_book> cate_book { get; set; }
         public virtual DbSet<category> categories { get; set; }
         public virtual DbSet<detail_order> detail_order { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<user> users { get; set; }
         public virtual DbSet<vendor> vendors { get; set; }
     }
 }

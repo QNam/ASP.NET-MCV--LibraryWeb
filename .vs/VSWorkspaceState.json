@@ -7,8 +7,9 @@
     "\\LibraryWeb\\Models",
     "\\LibraryWeb\\Views",
     "\\LibraryWeb\\Views\\Author",
+    "\\LibraryWeb\\Views\\Order",
     "\\LibraryWeb\\Views\\Shared"
   ],
-  "SelectedNode": "\\LibraryWeb\\Models\\Library.edmx",
+  "SelectedNode": "\\LibraryWeb\\Controllers\\OrderController.cs",
   "PreviewInSolutionExplorer": false
 }

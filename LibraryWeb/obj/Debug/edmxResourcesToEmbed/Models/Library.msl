@@ -4,73 +4,101 @@
     <EntitySetMapping Name="authors">
       <EntityTypeMapping TypeName="libraryModel.author">
         <MappingFragment StoreEntitySet="author">
-          <ScalarProperty Name="author_id" ColumnName="author_id" />
           <ScalarProperty Name="author_name" ColumnName="author_name" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="books">
       <EntityTypeMapping TypeName="libraryModel.book">
         <MappingFragment StoreEntitySet="book">
-          <ScalarProperty Name="book_id" ColumnName="book_id" />
-          <ScalarProperty Name="book_name" ColumnName="book_name" />
-          <ScalarProperty Name="book_qty" ColumnName="book_qty" />
-          <ScalarProperty Name="category_id" ColumnName="category_id" />
-          <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
-          <ScalarProperty Name="author_id" ColumnName="author_id" />
-          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="book_price" ColumnName="book_price" />
           <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+          <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="book_qty" ColumnName="book_qty" />
+          <ScalarProperty Name="book_name" ColumnName="book_name" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cate_book">
+      <EntityTypeMapping TypeName="libraryModel.cate_book">
+        <MappingFragment StoreEntitySet="cate_book">
+          <ScalarProperty Name="cate_book_id" ColumnName="cate_book_id" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="cate_id" ColumnName="cate_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="categories">
       <EntityTypeMapping TypeName="libraryModel.category">
         <MappingFragment StoreEntitySet="category">
-          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-          <ScalarProperty Name="cat_name" ColumnName="cat_name" />
           <ScalarProperty Name="cat_parent" ColumnName="cat_parent" />
+          <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="detail_order">
       <EntityTypeMapping TypeName="libraryModel.detail_order">
         <MappingFragment StoreEntitySet="detail_order">
-          <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
-          <ScalarProperty Name="order_id" ColumnName="order_id" />
-          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="book_price" ColumnName="book_price" />
+          <ScalarProperty Name="book_status" ColumnName="book_status" />
           <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="orders">
       <EntityTypeMapping TypeName="libraryModel.order">
         <MappingFragment StoreEntitySet="order">
-          <ScalarProperty Name="order_id" ColumnName="order_id" />
-          <ScalarProperty Name="order_from" ColumnName="order_from" />
-          <ScalarProperty Name="order_to" ColumnName="order_to" />
-          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="order_forfeit" ColumnName="order_forfeit" />
+          <ScalarProperty Name="order_deposit" ColumnName="order_deposit" />
+          <ScalarProperty Name="order_pay" ColumnName="order_pay" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="order_to" ColumnName="order_to" />
+          <ScalarProperty Name="order_from" ColumnName="order_from" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="libraryModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="libraryModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="user_addr" ColumnName="user_addr" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="createed_at" ColumnName="createed_at" />
+          <ScalarProperty Name="user_phone" ColumnName="user_phone" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vendors">
       <EntityTypeMapping TypeName="libraryModel.vendor">
         <MappingFragment StoreEntitySet="vendor">
-          <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
-          <ScalarProperty Name="vendor_name" ColumnName="vendor_name" />
-          <ScalarProperty Name="vendor_phone" ColumnName="vendor_phone" />
           <ScalarProperty Name="vendor_address" ColumnName="vendor_address" />
+          <ScalarProperty Name="vendor_phone" ColumnName="vendor_phone" />
+          <ScalarProperty Name="vendor_name" ColumnName="vendor_name" />
+          <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
