@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Categories";
+}
+<table class="table table-bordered">
+    <thead>
+        <th>
+            Tên thể loại
+        </th>
+        <th>
+            Số lượng
+        </th>
+    </thead>
+    <tbody>
+
+        @foreach (var i in ViewBag.category)
+        {
+            <tr>
+                <td>@i.cat_name</td>
+                <td>@i.cat_id</td>
+            </tr>
+        }
+    </tbody>
+</table>

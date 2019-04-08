@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách danh mục thể loại sách</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <br>
+                <div class="pull-right">
+                    <button class="btn btn-success" onclick="addCate()"><span><i class="fa fa-plus"></i></span> Thêm danh mục</button>
+                </div>
+
+                <table id="viewAuthorDT" class="table table-bordered">
+                    <thead>
+                    <td class="text-center ">Tên thể loại</td>
+                    <td class="text-center w-10">Số lượng</td>
+                    <td class="text-center"></td>
+                    </thead>
+                    <tbody>
+                        @foreach (var i in ViewBag.category)
+                        {
+                            <tr>
+                                <td class="text-center">@i.cat_name</td>
+                                <td class="text-center">@i.cat_id</td>
+
+                                <td class="text-center">
+                                    <a href="javascript:;" class="action-link bg-sussess" onclick="">
+                                        <span><i class="fa fa-eye"></i></span>
+                                    </a>
+                                    <a href="javascript:;" onclick="getCateForEdit(@i.cat_id)"
+                                       class="action-link bg-warning">
+                                        <span><i class="fa fa-pencil"></i></span>
+                                    </a>
+                                    <a href="javascript:;" class="action-link bg-danger" onclick="removeAuthor()">
+                                        <span><i class="fa fa-trash-o"></i></span>
+                                    </a>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("Store")
+<script>
+    $('#modalCategory').on('hidden.bs.modal', function () {
+        $('#modalCategory input').val("");
+    });
+
+    function addCate() {
+        $('#modalCategory').modal('show');
+    }
+
+    function getCateForEdit(id) {
+        $('#modalCategory').modal('show');
+        $('#modalCategory input[name="cateId"]').val(id);
+        $.ajax({
+            url: '/Category/GetOneCate',
+            type: 'POST',
+            data: { cateId: id },
+            success: function (data) {
+                $('#modalCategỏy').modal('show');
+                $('#modalCategory input[name = "cateName"]').val(data['cat_name']);
+                console.log(data);
+            },
+            error: function () {
+                /* Act on the event */
+            }
+        })
+    }
+
+    //function removeCategory(id) {
+    //    if (confirm("Bạn chắc chắn muốn xóa danh mục này ?")) {
+    //        $.ajax({
+    //            url: '/Category/AjaxRemoveCategory',
+    //            type: 'POST',
+    //            data: { cateId: id },
+    //            success: function (data) {
+    //                if (data.Status) {
+    //                    AuthorDT.rows('#author-' + id).remove().draw();
+    //                    showNotify("", data.Msg, 'bg-sussess');
+    //                }
+    //                else {
+    //                    showNotify("", data.Msg, 'bg-danger');
+    //                }
+
+    //            },
+    //            error: function () {
+    //                /* Act on the event */
+    //            }
+    //        })
+    //    }
+</script>

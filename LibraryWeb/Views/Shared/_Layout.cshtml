@@ -47,7 +47,7 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home </a></li>
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>
                                     <a><i class="fa fa-book"></i> Sách <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -58,6 +58,12 @@
                                     <a><i class="fa fa-user"></i> Tác giả <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Danh sách tác giả", "Index", "Author")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-paw"></i>Danh mục thể loại <span class="fa fa-chevron-down"</span></a>
+                                    <ul class="nav child_menu">
+                                        <li>@Html.ActionLink("Danh sách danh mục", "Index", "Category")</li>
                                     </ul>
                                 </li>
                         </div>
