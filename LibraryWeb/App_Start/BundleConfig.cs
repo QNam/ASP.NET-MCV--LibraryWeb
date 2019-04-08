@@ -12,6 +12,7 @@ namespace LibraryWeb
             bundles.Add(new ScriptBundle("~/bundles/base").Include(
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/jquery-validation.min.js",
+                        "~/Scripts/jquery.autocomplete.min.js",
                         "~/Scripts/pnotify.custom.min.js",
                         "~/Scripts/datatables.min.js",
                         "~/Scripts/dataTables.bootstrap.min.js",

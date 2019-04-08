@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lý Mượn Sách";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model  LibraryWeb.Models.order
+@*@model  LibraryWeb.Models.detail_order*@
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách Đơn Mượn</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <br>
+                <div class="pull-right">
+                    <button class="btn btn-success" onclick="addOrder()"><span><i class="fa fa-plus"></i></span> Mươn sách</button>
+                </div>
+
+                <table id="viewAuthorDT" class="table table-bordered">
+                    <thead>
+                    <th class="text-center w-10">@Html.DisplayNameFor(model => model.order_id)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.user_id)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.order_from)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.order_to)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.order_deposit)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.order_pay)</th>
+                    <th class="text-center"></th>
+                    </thead>
+                    <tbody>
+                        @Html.Partial("Data")
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" disabled id="bookJson" value="@ViewBag.bookJson" />
+<input type="hidden" disabled id="userJson" value="@ViewBag.userJson" />
+
+
+@*Modal thêm sửa Đơn hàng*@
+@Html.Partial("Store")
+
+@section Scripts
+{
+    <script>
+        (function () {
+            const autocompleteData = JSON.parse($('#bookJson').val());
+            var dataSelected = [];
+
+            $('#autocomplete').autocomplete({
+                lookup: autocompleteData,
+                onSelect: function (suggestion) {
+                    $(this).val("");
+
+                    if (!dataSelected.includes(suggestion.data))
+                    {
+                        dataSelected.push(suggestion.data);
+                        let html = `<tr>
+                                  <td>${suggestion.data}</td>
+                                  <td>${suggestion.value}</td>
+                                  <td>${suggestion.book_author}</td>  
+                                  <td>${suggestion.book_price}</td>
+                                </tr>`;
+                        console.log(dataSelected);
+
+                        $("#tableBook tbody").append(html);
+                    }
+
+                }
+            });
+
+        })();
+        
+       //---------------------------------------------------------------------------------
+
+        (function () {
+            const autocompleteData = JSON.parse( $('#userJson').val() );
+
+            console.log(autocompleteData);
+
+            $('#autocomplete2').autocomplete({
+                lookup: autocompleteData,
+                onSelect: function (suggestion) {
+                    $('input[name="orderUserId"]').val(suggestion.data)
+                    $('input[name="orderUserPhone"]').val(suggestion.user_phone)
+                    $('input[name="orderUserAddr"]').val(suggestion.user_addr)
+                }
+            });
+
+        })();
+       
+
+    </script>
+
+    <script>
+        function addOrder() {
+            $('#modalOrder').modal('show');
+        }
+
+        function ViewDetailOrder(id) {
+            $('#detailOrder-' + id).toggle('slow');
+        }
+
+        function getOrderForEdit(id) {
+
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: { orderId: id },
+                success: function (data) {
+                    //$('#modalAuthor').modal('show');
+                    //$('#modalAuthor input[name = "authorName"]').val(data['author_name']);
+                    //console.log(data);
+                },
+                error: function () {
+                    /* Act on the event */
+                }
+            })
+        }
+
+
+        function removeOrder(id) {
+
+            if (confirm()) {
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: { orderId: id },
+                    success: function (data) {
+                        if (data.Status) {
+                            //AuthorDT.rows('#author-' + id).remove().draw();
+                            showNotify("", data.Msg, 'bg-sussess');
+                        }
+                        else {
+                            showNotify("", data.Msg, 'bg-danger');
+                        }
+
+                    },
+                    error: function () {
+                        /* Act on the event */
+                    }
+                })
+            }
+
+        }
+    </script>
+}
+

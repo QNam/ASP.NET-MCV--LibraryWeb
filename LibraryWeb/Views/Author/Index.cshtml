@@ -36,9 +36,9 @@
 
                 <table id="viewAuthorDT" class="table table-bordered">
                     <thead>
-                        <td class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</td>
-                        <td class="text-center">@Html.DisplayNameFor(model => model.author_name)</td>
-                        <td class="text-center"></td>
+                        <th class="text-center w-10">@Html.DisplayNameFor(model => model.author_id)</th>
+                        <th class="text-center">@Html.DisplayNameFor(model => model.author_name)</th>
+                        <th class="text-center"></th>
                     </thead>
                     <tbody>
                        @Html.Partial("Data")
@@ -123,6 +123,7 @@
 
 
         function removeAuthor(id) {
+
             if (confirm("Tác giả chỉ có thể xóa khi không tồn tại cuốn sách nào thuộc tác giả này !\nBạn chắc chắn !")) {
                 $.ajax({
                     url: '/Author/AjaxRemoveAuthor',

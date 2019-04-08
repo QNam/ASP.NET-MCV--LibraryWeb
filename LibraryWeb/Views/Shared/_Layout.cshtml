@@ -48,6 +48,7 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li><a href=""><i class="fa fa-home"></i> Home </a></li>
                                 <li>
                                     <a><i class="fa fa-book"></i> Sách <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -64,6 +65,9 @@
                                     <a><i class="fa fa-paw"></i>Danh mục thể loại <span class="fa fa-chevron-down"</span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Danh sách danh mục", "Index", "Category")</li>
+                                    <a><i class="fa fa-money"></i> Mượn sách <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>@Html.ActionLink("Danh sách mượn sách", "Index", "Order")</li>
                                     </ul>
                                 </li>
                         </div>

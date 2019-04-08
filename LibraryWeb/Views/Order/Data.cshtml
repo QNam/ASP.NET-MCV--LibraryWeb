@@ -1,0 +1,93 @@
+﻿@model  LibraryWeb.Models.order
+@{ 
+    int book_is_not_return  = @LibraryWeb.Models.order.BOOK_RETURN_FALSE;
+    int book_is_return = @LibraryWeb.Models.order.BOOK_RETURN_TRUE;
+}
+@foreach (var order in ViewBag.orders)
+{
+    <tr>
+        <td class="text-center">@order.order_id</td>
+        <td class="text-center">@order.user.user_name</td>
+        <td class="text-center">@order.order_from</td>
+        <td class="text-center">@order.order_to</td>
+        <td class="text-center">@order.order_deposit</td>
+        <td class="text-center">@order.order_pay</td>
+        <td class="text-center">
+            <a href="javascript:;" class="action-link bg-sussess" onclick="ViewDetailOrder(@order.order_id)">
+                <span><i class="fa fa-eye"></i></span>
+            </a>
+            <a href="javascript:;"
+               class="action-link bg-warning">
+                <span><i class="fa fa-pencil"></i></span>
+            </a>
+            <a href="javascript:;" class="action-link bg-danger">
+                <span><i class="fa fa-trash-o"></i></span>
+            </a>
+        </td>
+    </tr>
+    <tr class="detailOrder" id="detailOrder-@order.order_id" style="display: none">
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td style="display:none"></td>
+        <td colspan="7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span><i class="fa fa-info-circle"></i></span>
+                    Chi Tiết Đơn Mượn
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><b>Họ Tên: </b>@order.user.user_name</p>
+                            <p><b>SDT: </b>@order.user.user_phone</p>
+                            <p><b>Địa chỉ: </b>@order.user.user_addr</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><b>@Html.DisplayNameFor(model => model.order_from): </b>@order.order_from</p>
+                            <p><b>@Html.DisplayNameFor(model => model.order_to): </b>@order.order_to</p>
+                            <p><b>@Html.DisplayNameFor(model => model.order_deposit): </b>@order.order_deposit</p>
+                            <p><b>@Html.DisplayNameFor(model => model.order_pay): </b>@order.order_pay</p>
+                            <p><b>@Html.DisplayNameFor(model => model.order_forfeit): </b>@order.order_forfeit</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <table class="table table-hover">
+                            <thead>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                            <th>Đã trả</th>
+                            <th>Tình trạng</th>
+                            <th>Giá Mượn</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in order.detail_order)
+                                {
+
+                                    string book_return_text = "Chưa trả lại";
+                                    @: @if (detail.status == book_is_return)
+                                    {
+                                        book_return_text = "Đã trả lại";
+                                    }
+
+                                    <tr>
+                                        <td>@detail.book.book_name</td>
+                                        <td>@detail.book.author.author_name</td>
+                                        <td>@book_return_text</td>
+                                        <td>@detail.book_status</td>
+                                        <td>@detail.book_price</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </td>
+    </tr>
+}
