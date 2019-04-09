@@ -19,7 +19,6 @@
           <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="book_name" Type="nvarchar" MaxLength="250" />
           <Property Name="book_qty" Type="int" />
-          <Property Name="category_id" Type="int" Nullable="false" />
           <Property Name="vendor_id" Type="int" Nullable="false" />
           <Property Name="author_id" Type="int" Nullable="false" />
           <Property Name="created_at" Type="date" />
@@ -51,7 +50,8 @@
           <Property Name="book_id" Type="int" Nullable="false" />
           <Property Name="status" Type="int" />
           <Property Name="book_status" Type="int" Nullable="false" />
-          <Property Name="book_price" Type="int" />
+          <Property Name="book_deposit" Type="int" />
+          <Property Name="order_qty" Type="int" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -83,7 +83,7 @@
           </Key>
           <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_name" Type="varchar" MaxLength="100" />
-          <Property Name="user_phone" Type="nchar" MaxLength="10" />
+          <Property Name="user_phone" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="createed_at" Type="date" />
           <Property Name="updated_at" Type="date" />
           <Property Name="user_addr" Type="varchar" MaxLength="150" />
@@ -106,18 +106,6 @@
             </Principal>
             <Dependent Role="book">
               <PropertyRef Name="author_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_book_category">
-          <End Role="category" Type="Self.category" Multiplicity="1" />
-          <End Role="book" Type="Self.book" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="category">
-              <PropertyRef Name="cat_id" />
-            </Principal>
-            <Dependent Role="book">
-              <PropertyRef Name="category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -154,18 +142,6 @@
             </Principal>
             <Dependent Role="cate_book">
               <PropertyRef Name="cate_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_detail_order_book">
-          <End Role="book" Type="Self.book" Multiplicity="1" />
-          <End Role="detail_order" Type="Self.detail_order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="book">
-              <PropertyRef Name="book_id" />
-            </Principal>
-            <Dependent Role="detail_order">
-              <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -207,10 +183,6 @@
             <End Role="author" EntitySet="author" />
             <End Role="book" EntitySet="book" />
           </AssociationSet>
-          <AssociationSet Name="FK_book_category" Association="Self.FK_book_category">
-            <End Role="category" EntitySet="category" />
-            <End Role="book" EntitySet="book" />
-          </AssociationSet>
           <AssociationSet Name="FK_book_vendor" Association="Self.FK_book_vendor">
             <End Role="vendor" EntitySet="vendor" />
             <End Role="book" EntitySet="book" />
@@ -222,10 +194,6 @@
           <AssociationSet Name="FK_cate_book_category" Association="Self.FK_cate_book_category">
             <End Role="category" EntitySet="category" />
             <End Role="cate_book" EntitySet="cate_book" />
-          </AssociationSet>
-          <AssociationSet Name="FK_detail_order_book" Association="Self.FK_detail_order_book">
-            <End Role="book" EntitySet="book" />
-            <End Role="detail_order" EntitySet="detail_order" />
           </AssociationSet>
           <AssociationSet Name="FK_detail_order_order" Association="Self.FK_detail_order_order">
             <End Role="order" EntitySet="order" />
@@ -254,10 +222,6 @@
             <End Role="author" EntitySet="authors" />
             <End Role="book" EntitySet="books" />
           </AssociationSet>
-          <AssociationSet Name="FK_book_category" Association="libraryModel.FK_book_category">
-            <End Role="category" EntitySet="categories" />
-            <End Role="book" EntitySet="books" />
-          </AssociationSet>
           <AssociationSet Name="FK_book_vendor" Association="libraryModel.FK_book_vendor">
             <End Role="vendor" EntitySet="vendors" />
             <End Role="book" EntitySet="books" />
@@ -265,10 +229,6 @@
           <AssociationSet Name="FK_cate_book_book" Association="libraryModel.FK_cate_book_book">
             <End Role="book" EntitySet="books" />
             <End Role="cate_book" EntitySet="cate_book" />
-          </AssociationSet>
-          <AssociationSet Name="FK_detail_order_book" Association="libraryModel.FK_detail_order_book">
-            <End Role="book" EntitySet="books" />
-            <End Role="detail_order" EntitySet="detail_order" />
           </AssociationSet>
           <AssociationSet Name="FK_cate_book_category" Association="libraryModel.FK_cate_book_category">
             <End Role="category" EntitySet="categories" />
@@ -298,17 +258,14 @@
           <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="book_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="book_qty" Type="Int32" />
-          <Property Name="category_id" Type="Int32" Nullable="false" />
           <Property Name="vendor_id" Type="Int32" Nullable="false" />
           <Property Name="author_id" Type="Int32" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Precision="0" />
           <Property Name="updated_at" Type="DateTime" Precision="0" />
           <Property Name="book_price" Type="Int32" />
           <NavigationProperty Name="author" Relationship="libraryModel.FK_book_author" FromRole="book" ToRole="author" />
-          <NavigationProperty Name="category" Relationship="libraryModel.FK_book_category" FromRole="book" ToRole="category" />
           <NavigationProperty Name="vendor" Relationship="libraryModel.FK_book_vendor" FromRole="book" ToRole="vendor" />
           <NavigationProperty Name="cate_book" Relationship="libraryModel.FK_cate_book_book" FromRole="book" ToRole="cate_book" />
-          <NavigationProperty Name="detail_order" Relationship="libraryModel.FK_detail_order_book" FromRole="book" ToRole="detail_order" />
         </EntityType>
         <EntityType Name="cate_book">
           <Key>
@@ -327,7 +284,6 @@
           <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="cat_parent" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="books" Relationship="libraryModel.FK_book_category" FromRole="category" ToRole="book" />
           <NavigationProperty Name="cate_book" Relationship="libraryModel.FK_cate_book_category" FromRole="category" ToRole="cate_book" />
         </EntityType>
         <EntityType Name="detail_order">
@@ -339,8 +295,8 @@
           <Property Name="book_id" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Int32" />
           <Property Name="book_status" Type="Int32" Nullable="false" />
-          <Property Name="book_price" Type="Int32" />
-          <NavigationProperty Name="book" Relationship="libraryModel.FK_detail_order_book" FromRole="detail_order" ToRole="book" />
+          <Property Name="book_deposit" Type="Int32" />
+          <Property Name="order_qty" Type="Int32" />
           <NavigationProperty Name="order" Relationship="libraryModel.FK_detail_order_order" FromRole="detail_order" ToRole="order" />
         </EntityType>
         <EntityType Name="order">
@@ -355,9 +311,9 @@
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="order_pay" Type="Int32" />
           <Property Name="order_deposit" Type="Int32" />
+          <Property Name="order_forfeit" Type="Int32" />
           <NavigationProperty Name="detail_order" Relationship="libraryModel.FK_detail_order_order" FromRole="order" ToRole="detail_order" />
           <NavigationProperty Name="user" Relationship="libraryModel.FK_order_user" FromRole="order" ToRole="user" />
-          <Property Name="order_forfeit" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -375,7 +331,7 @@
           </Key>
           <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="user_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="user_phone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="createed_at" Type="DateTime" Precision="0" />
           <Property Name="updated_at" Type="DateTime" Precision="0" />
           <Property Name="user_addr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -403,18 +359,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_book_category">
-          <End Type="libraryModel.category" Role="category" Multiplicity="1" />
-          <End Type="libraryModel.book" Role="book" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="category">
-              <PropertyRef Name="cat_id" />
-            </Principal>
-            <Dependent Role="book">
-              <PropertyRef Name="category_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_book_vendor">
           <End Type="libraryModel.vendor" Role="vendor" Multiplicity="1" />
           <End Type="libraryModel.book" Role="book" Multiplicity="*" />
@@ -435,18 +379,6 @@
               <PropertyRef Name="book_id" />
             </Principal>
             <Dependent Role="cate_book">
-              <PropertyRef Name="book_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_detail_order_book">
-          <End Type="libraryModel.book" Role="book" Multiplicity="1" />
-          <End Type="libraryModel.detail_order" Role="detail_order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="book">
-              <PropertyRef Name="book_id" />
-            </Principal>
-            <Dependent Role="detail_order">
               <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -509,7 +441,6 @@
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="author_id" ColumnName="author_id" />
                 <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
-                <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="book_qty" ColumnName="book_qty" />
                 <ScalarProperty Name="book_name" ColumnName="book_name" />
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
@@ -537,7 +468,8 @@
           <EntitySetMapping Name="detail_order">
             <EntityTypeMapping TypeName="libraryModel.detail_order">
               <MappingFragment StoreEntitySet="detail_order">
-                <ScalarProperty Name="book_price" ColumnName="book_price" />
+                <ScalarProperty Name="order_qty" ColumnName="order_qty" />
+                <ScalarProperty Name="book_deposit" ColumnName="book_deposit" />
                 <ScalarProperty Name="book_status" ColumnName="book_status" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="book_id" ColumnName="book_id" />

@@ -18,13 +18,11 @@ namespace LibraryWeb.Models
         public book()
         {
             this.cate_book = new HashSet<cate_book>();
-            this.detail_order = new HashSet<detail_order>();
         }
     
         public int book_id { get; set; }
         public string book_name { get; set; }
         public Nullable<int> book_qty { get; set; }
-        public int category_id { get; set; }
         public int vendor_id { get; set; }
         public int author_id { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
@@ -32,11 +30,8 @@ namespace LibraryWeb.Models
         public Nullable<int> book_price { get; set; }
     
         public virtual author author { get; set; }
-        public virtual category category { get; set; }
         public virtual vendor vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cate_book> cate_book { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<detail_order> detail_order { get; set; }
     }
 }

@@ -17,7 +17,6 @@
           <ScalarProperty Name="created_at" ColumnName="created_at" />
           <ScalarProperty Name="author_id" ColumnName="author_id" />
           <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
-          <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="book_qty" ColumnName="book_qty" />
           <ScalarProperty Name="book_name" ColumnName="book_name" />
           <ScalarProperty Name="book_id" ColumnName="book_id" />
@@ -45,7 +44,8 @@
     <EntitySetMapping Name="detail_order">
       <EntityTypeMapping TypeName="libraryModel.detail_order">
         <MappingFragment StoreEntitySet="detail_order">
-          <ScalarProperty Name="book_price" ColumnName="book_price" />
+          <ScalarProperty Name="order_qty" ColumnName="order_qty" />
+          <ScalarProperty Name="book_deposit" ColumnName="book_deposit" />
           <ScalarProperty Name="book_status" ColumnName="book_status" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="book_id" ColumnName="book_id" />

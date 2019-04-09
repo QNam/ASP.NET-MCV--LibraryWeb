@@ -2,14 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\LibraryWeb",
-    "\\LibraryWeb\\App_Start",
-    "\\LibraryWeb\\Controllers",
-    "\\LibraryWeb\\Models",
-    "\\LibraryWeb\\Views",
-    "\\LibraryWeb\\Views\\Author",
-    "\\LibraryWeb\\Views\\Order",
-    "\\LibraryWeb\\Views\\Shared"
+    "\\LibraryWeb\\Views"
   ],
-  "SelectedNode": "\\LibraryWeb\\Controllers\\OrderController.cs",
+  "SelectedNode": "\\LibraryWeb\\Views",
   "PreviewInSolutionExplorer": false
 }

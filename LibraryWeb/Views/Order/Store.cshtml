@@ -1,72 +1,94 @@
-﻿<div class="modal fade" id="modalOrder">
-    <div class="modal-dialog" style="width: 75vw">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Tạo Phiếu Mượn</h4>
-            </div>
-         
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <input type="text" id="autocomplete" class="form-control" placeholder="Tìm thông tin sách" />
-                        <table class="table" id="tableBook">
-                            <thead>
+﻿<style>
+    #modalOrder input::-webkit-outer-spin-button,
+    #modalOrder input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    #modalOrder input[type=number] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+</style>
+<div class="modal fade" id="modalOrder">
+    <form action="Order/Store" methos="POST">
+        <div class="modal-dialog" style="width: 80vw">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Tạo Phiếu Mượn</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <input type="text" id="autocomplete" class="form-control" placeholder="Tìm thông tin sách" />
+                            <table class="table" id="tableBook">
+                                <thead>
                                 <th>ID</th>
                                 <th>Tên Sách</th>
                                 <th>Tác Giả</th>
+                                <th>Số lượng Mượn</th>
                                 <th>Giá Mượn</th>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
 
-                            </tbody>
-                        </table>
+                                    <h4>Thông tin người mượn</h4>
+                                    <input type="hidden" name="" class="form-control" value="" />
+                                    <div class="form-group">
+                                        <label>Họ tên: </label>
+                                        <input type="text" name="orderUserName" id="autocomplete2" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SDT: </label>
+                                        <input type="number" name="orderUserPhone" id="autocomplete3" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Địa chỉ: </label>
+                                        <input type="text" name="orderUserAddr" class="form-control" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Thông tin thanh toán</h4>
+                                    <div class="form-group">
+                                        <label>Mượn từ: </label>
+                                        <input type="date" name="orderFrom" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mượn đến: </label>
+                                        <input type="date" name="orderTo" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cọc: </label>
+                                        <input type="text" name="orderForeit" class="form-control" value="0"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-
-                                <h4>Thông tin người mượn</h4>
-                                <input type="hidden" name="" class="form-control" value="" />
-                                <div class="form-group">
-                                    <label>Họ tên: </label>
-                                    <input type="text" name="orderUsername" id="autocomplete2" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>SDT: </label>
-                                    <input type="number" name="orderUserPhone" id="autocomplete3" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Địa chỉ: </label>
-                                    <input type="text" name="orderUserAddr" class="form-control" />
-                                </div>
-
+                    <div class="row">
+                        <div class="col-lg-12">
+                            
+                            <div class="text-right">
+                                   <button type="button" class="btn btn-success" onclick="PostDataOrder()">Cập nhật</button>
                             </div>
-                        </div>
-                        
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4>Thông tin thanh toán</h4>
-                                <div class="form-group">
-                                    <label>Mượn từ: </label>
-                                    <input type="text" name="" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Mượn đến: </label>
-                                    <input type="number" name="" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Cọc: </label>
-                                    <input type="text" name="" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <style>
     .autocomplete-suggestions {

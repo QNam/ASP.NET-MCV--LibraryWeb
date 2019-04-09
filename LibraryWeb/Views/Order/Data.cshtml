@@ -65,23 +65,7 @@
                             <th>Giá Mượn</th>
                             </thead>
                             <tbody>
-                                @foreach (var detail in order.detail_order)
-                                {
-
-                                    string book_return_text = "Chưa trả lại";
-                                    @: @if (detail.status == book_is_return)
-                                    {
-                                        book_return_text = "Đã trả lại";
-                                    }
-
-                                    <tr>
-                                        <td>@detail.book.book_name</td>
-                                        <td>@detail.book.author.author_name</td>
-                                        <td>@book_return_text</td>
-                                        <td>@detail.book_status</td>
-                                        <td>@detail.book_price</td>
-                                    </tr>
-                                }
+                              
                             </tbody>
                         </table>
                     </div>

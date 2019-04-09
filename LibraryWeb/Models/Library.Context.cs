@@ -19,7 +19,6 @@ namespace LibraryWeb.Models
             : base("name=libraryEntities")
         {
         }
-
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

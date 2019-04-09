@@ -62,9 +62,17 @@
 @section Scripts
 {
     <script>
+        $(document).ready(function () {
+            let today = moment().format('YYYY-MM-DD');
+            $('input[name="orderFrom"]').val(today);
+        });
+        
+    </script>
+    <script>
         (function () {
             const autocompleteData = JSON.parse($('#bookJson').val());
             var dataSelected = [];
+            var rentTotal = 0;
 
             $('#autocomplete').autocomplete({
                 lookup: autocompleteData,
@@ -75,12 +83,18 @@
                     {
                         dataSelected.push(suggestion.data);
                         let html = `<tr>
-                                  <td>${suggestion.data}</td>
+                                  <td>${suggestion.data}
+                                    <input class="orderBookId" type="hidden" name="orderBookId[]" value="${suggestion.data}"></td>
                                   <td>${suggestion.value}</td>
                                   <td>${suggestion.book_author}</td>  
-                                  <td>${suggestion.book_price}</td>
+                                  <td><input type="number" class="form-control w-50" 
+                                        onkeyup="caclRentBook(this); caclRentOrder()" name="orderBookQty[]" value="1"></td>
+                                  <td class="book_rent_text">${suggestion.book_deposit}</td>
+                                  <td style="display: none"><input class="book_rent_input" type="hidden" value="${suggestion.book_deposit}"></td>
+                                  <td style="display: none"><input class="book_rent_total" type="hidden" value="0"></td>
                                 </tr>`;
-                        console.log(dataSelected);
+                        rentTotal -= -suggestion.book_deposit;
+                        $('input[name="orderForeit"]').val(rentTotal);
 
                         $("#tableBook tbody").append(html);
                     }
@@ -89,13 +103,40 @@
             });
 
         })();
-        
+
+        function caclRentBook(item)
+        {
+            let qty = $(item).val();
+            let rent = $(item).parent().parent().find('.book_rent_input').val();
+            if (qty == "") qty = 0;
+            $(item).parent().parent().find('.book_rent_text').text(qty * rent)
+            $(item).parent().parent().find('.book_rent_total').val(qty * rent)
+
+            return qty * rent;
+        }
+
+        function caclRentOrder()
+        {
+            const dom = $('.book_rent_total');
+            var total = 0;
+
+
+            if (dom.length != 0)
+            {
+                for (i = 0; i < dom.length; i++) {
+                    total -= -dom[i].value;
+                }
+            }
+
+            $('input[name="orderForeit"]').val(total);
+            return total;
+        }
+
+
        //---------------------------------------------------------------------------------
 
         (function () {
             const autocompleteData = JSON.parse( $('#userJson').val() );
-
-            console.log(autocompleteData);
 
             $('#autocomplete2').autocomplete({
                 lookup: autocompleteData,
@@ -107,7 +148,8 @@
             });
 
         })();
-       
+
+
 
     </script>
 
@@ -120,6 +162,43 @@
             $('#detailOrder-' + id).toggle('slow');
         }
 
+        function getDataBookOfOrder()
+        {
+            let data = [];
+
+            const dom = $('input[name="orderBookId[]"]');
+            const domQty = $('input[name="orderBookQty[]"]');
+
+            for (i = 0; i < dom.length; i++)
+            {
+                let qty = $(domQty[i]).val();
+                if (qty == "") qty = 0;
+                data.push({ "id": $(dom[i]).val(), "qty": qty });
+            }
+            return data;
+        }
+        function PostDataOrder()
+        {
+            $.ajax({
+                url: 'Order/Store',
+                type: 'POST',
+                data: {
+                    Books: JSON.stringify( getDataBookOfOrder() ),
+                    orderUserPhone: $('input[name="orderUserPhone"]').val(),
+                    orderUserName: $('input[name="orderUserName"]').val(),
+                    orderUserAddr: $('input[name="orderUserAddr"]').val(),
+
+                    orderFrom: $('input[name="orderFrom"]').val(),
+                    orderTo: $('input[name="orderTo"]').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+                    /* Act on the event */
+                }
+            })  
+        }
         function getOrderForEdit(id) {
 
             $.ajax({
@@ -137,31 +216,6 @@
             })
         }
 
-
-        function removeOrder(id) {
-
-            if (confirm()) {
-                $.ajax({
-                    url: '',
-                    type: 'POST',
-                    data: { orderId: id },
-                    success: function (data) {
-                        if (data.Status) {
-                            //AuthorDT.rows('#author-' + id).remove().draw();
-                            showNotify("", data.Msg, 'bg-sussess');
-                        }
-                        else {
-                            showNotify("", data.Msg, 'bg-danger');
-                        }
-
-                    },
-                    error: function () {
-                        /* Act on the event */
-                    }
-                })
-            }
-
-        }
     </script>
 }
 

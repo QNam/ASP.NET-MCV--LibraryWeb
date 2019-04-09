@@ -17,7 +17,6 @@ namespace LibraryWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public category()
         {
-            this.books = new HashSet<book>();
             this.cate_book = new HashSet<cate_book>();
         }
     
@@ -25,8 +24,6 @@ namespace LibraryWeb.Models
         public string cat_name { get; set; }
         public int cat_parent { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<book> books { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cate_book> cate_book { get; set; }
     }

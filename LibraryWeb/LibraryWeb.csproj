@@ -157,12 +157,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib\Message.cs" />
+    <Compile Include="Lib\Order.cs" />
     <Compile Include="Models\author.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
@@ -193,6 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Library.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\author.cs" />
     <Compile Include="Models\order.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
@@ -212,6 +215,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.min.css" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
+    <Content Include="Content\daterangepicker.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\img\avatar.jpg" />
@@ -248,9 +252,11 @@
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\datatables.min.js" />
+    <Content Include="Scripts\daterangepicker.js" />
     <Content Include="Scripts\jquery-validation.min.js" />
     <Content Include="Scripts\jquery.autocomplete.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\pnotify.custom.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -288,6 +294,8 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Data.cshtml" />
     <Content Include="Views\Order\Store.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Store.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

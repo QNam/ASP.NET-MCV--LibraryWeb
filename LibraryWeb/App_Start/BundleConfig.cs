@@ -12,6 +12,8 @@ namespace LibraryWeb
             bundles.Add(new ScriptBundle("~/bundles/base").Include(
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/jquery-validation.min.js",
+                        "~/Scripts/moment.min.js",
+                        "~/Scripts/daterangepicker.js",
                         "~/Scripts/jquery.autocomplete.min.js",
                         "~/Scripts/pnotify.custom.min.js",
                         "~/Scripts/datatables.min.js",
@@ -26,6 +28,7 @@ namespace LibraryWeb
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/dataTables.bootstrap.min.css",
+                      "~/Content/daterangepicker.css",
                       "~/Content/pnotify.custom.min.css",
                       "~/Content/bootstrap-editable.css",
                       "~/Content/custom.min.css"));
